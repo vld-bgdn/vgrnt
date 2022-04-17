@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "generic/ubuntu2004"
+
+  config.vm.define "kbr-clu-nd1" do |machine|
+    machine.vm.network "public_network", bridge: "br0", dev: "br0", ip: "192.168.88.117"
+  end
+
+  config.vm.define "kbr-clu-nd2" do |machine|
+    machine.vm.network  "public_network", bridge: "br0", dev: "br0", ip: "192.168.88.118"
+  end
+
+  config.vm.define 'kbr-clu-ctr1' do |machine|
+    machine.vm.network "public_network", bridge: "br0", dev: "br0", ip: "192.168.88.119"
+  end
+#    machine.vm.provision :ansible_local do |ansible|
+#      ansible.playbook       = "example.yml"
+#      ansible.verbose        = true
+#      ansible.install        = true
+#      ansible.limit          = "all"
+#      ansible.inventory_path = "inventory"
+end
